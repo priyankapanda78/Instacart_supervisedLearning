@@ -23,5 +23,5 @@ Approach:
 * Step 1: Exploratory Data Analysis on the dataset
 * Step 2: Feature engineering 
 * Step 3: Class imbalance checked and appropriate weights are assigned.
-* Step 4: Applying algorithms and checking for the F1 score
+* Step 4: Applying algorithms and checked for the F1 score
 * Step 5: Based on the ROC curve, Logistic regression performs better than DecisionTree.

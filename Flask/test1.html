@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Repurchase Predictor</title>
+    <link rel="stylesheet" href="static/d3.slider.css" />
+    <style>
+
+     body {
+       font-family: Verdana,Arial,sans-serif;
+     }
+
+     h2 {
+       font-size: 1.2em;
+       margin: 60px 0 5px 0;
+       color: gray
+     }
+
+     .space {
+       margin-bottom: 20 px;
+     }
+
+     .wrapper {
+       width: 800px;
+       margin-left: auto;
+       margin-right: auto;
+       margin-bottom: 0px;
+     }
+
+     #bar_chart {
+       margin-bottom: 0 px;
+     }
+
+     .bar {
+       fill: #FF75A3;
+     }
+
+     span {
+       color: steelblue;
+     }
+
+    </style>
+  </head>
+
+  <body>
+    <!-- Import the libraries: jQuery, d3, d3.slider -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+    <div>
+      Test Setup
+      <form id="repurchase_form" action="/localhost:5000/api" method="post">
+        User Id:<br>
+        <input type="number" id="user_id" ><br>
+        Product Id:<br>
+        <input type="number" id="product_id" ><br>
+        <input type="submit" value="Predict">
+      </form>
+    </div>
+    <div>RESULT</div>
+    <div id="response">
+    </div>
+    <script>
+
+      $(function() { //shorthand document.ready function
+        
+        $('#repurchase_form').on('submit', function(e) { //use on if jQuery 1.7+
+          e.preventDefault();  //prevent form from submitting
+          var userid = $("#user_id").val();
+          var productid = $("#product_id").val();
+          $.ajax({
+             type: "POST",
+             contentType: "application/json; charset=utf-8",
+             url: "/api",
+             dataType: "json",
+             async: true,
+             data: '{"user_id":' + userid + ',"product_id":' + productid + '}',
+             success: function (data) {
+              if(data.repurchase == 0){
+               $('#response').html('<p>NO</p>');
+              }
+              else {
+                $('#response').html('<p>YES</p>');
+              }
+             },
+             error: function (result) {
+               $('#response').html(result);
+             }
+          })
+        });
+
+      });
+
+    </script>
+     
+  </body>
+</html>

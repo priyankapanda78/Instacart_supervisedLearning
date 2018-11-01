@@ -41,12 +41,7 @@ def viz_page():
     
 @app.route("/api", methods=["POST"])
 def make_predict():
-    """
-    When A POST request with json data is made to this uri,
-    Read the example from the json, predict probability and
-    send it with a response
-    """
-    # Get decision score for our example that came with the request
+    
     data = flask.request.json
     user = data["user_id"]
     product = data["product_id"]
